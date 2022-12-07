@@ -1,0 +1,33 @@
+--Created a PC Store database.
+
+CREATE TABLE PC_Store (ID Integer Primary Key, Brand TEXT, Item TEXT, Quanity Integer, Rating Numeric, Price Numeric);
+
+INSERT INTO PC_Store 
+Values
+(1, "Asus", "Monitor", 36, 6, '$199.99'),
+(2, "Legion", "Monitor", 12, 9.5,'$489.99'),
+(3, "Dell", "Monitor", 32, 4.2,'$129.00'),
+(4, 'Corsair','Keyboard', 9, 9.9, '$200.00'),
+(5, 'Logitech', 'Keyboard', 56, 7.2, '$176.00'),
+(6, 'Razer', 'Keyboard', 43, 5.5, '$156.99'),
+(7, 'EVGA', 'Graphics Card', 17, 9.9, '$320.00'),
+(8, 'AMD', 'Graphics Card', 22, 8.9, '$299.99'),
+(9, 'Intel', 'Graphics Card', 72, 7.6, '$449.00'),
+(10, 'MSI', 'Graphics Card', 66, 6.6, '$354.00'),
+(11, 'Asus', 'Graphics Card', 89, 5.9, '$229.00'),
+(12, 'Steel Series', 'Headphones', 55, 9.7, '$199.99'),
+(13, 'Corsair', 'Headphones', 47, 8.9, '$125.99'),
+(14, 'Turtle Beach', 'Headphones', 71, 6.7, '$149.99'),
+(15, 'HyperX', 'Headphones', 39, 9.2, '$149.99');
+
+--Displayed the database ordered by price.
+Select * From PC_Store Order By 6 ASC;
+
+--Counted amount of products in database.
+SELECT COUNT(id) as 'Number of Products' FROM PC_Store;
+
+--What are the 5 most popular items?
+SELECT ID, brand, item, rating, price
+From PC_Store
+Order By Rating DESC
+Limit 5;
