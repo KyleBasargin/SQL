@@ -1,0 +1,86 @@
+/*  Created Database  */ 
+
+CREATE TABLE famous_people
+    (id INTEGER PRIMARY KEY,
+    first_name TEXT,
+    last_name TEXT,
+    birth_year INTEGER,
+    year_of_death INTEGER,
+    occupation TEXT);
+
+INSERT INTO famous_people VALUES(1,"Marilyn", "Monroe", "1926", "1962", "Singer");
+INSERT INTO famous_people VALUES(2,"Abraham", "Lincoln", "1809", "1865", "President");
+INSERT INTO famous_people VALUES(3,"John", "Kennedy", "1917", "1963", "President");
+INSERT INTO famous_people VALUES(4,"Albert", "Einstein", "1879", "1955", "Scientist");
+INSERT INTO famous_people VALUES(5,"Paul", "McCartney", "1942", "Present", "Musician");
+INSERT INTO famous_people VALUES(6,"Leonardo", "Da Vinci", "1452", "1519", "Artist");
+INSERT INTO famous_people VALUES(7,"Donald", "Trump", "1946", "Present", "President");
+INSERT INTO famous_people VALUES(8,"Muhammad", "Ali", "1942", "2016", "Boxer");
+INSERT INTO famous_people VALUES(9,"Thomas", "Edison", "1847", "1931", "Inventor");
+INSERT INTO famous_people VALUES(10,"Walt", "Disney", "1901", "1966", "Film Producer");
+INSERT INTO famous_people VALUES(11,"Angelina", "Jolie", "1975", "Present", "Actress");
+INSERT INTO famous_people VALUES(12,"J.K.", "Rowling", "1965", "Present", "Author");
+INSERT INTO famous_people VALUES(13,"Pablo", "Picasso", "1881", "1973", "Artist");
+INSERT INTO famous_people VALUES(14,"Amelia", "Earhart", "1897", "1937", "Aviator");
+INSERT INTO famous_people VALUES(15,"Michael", "Jackson", "1958", "2009", "Musician");
+INSERT INTO famous_people VALUES(16,"Joe", "Biden", "1942", "Present", "President");
+INSERT INTO famous_people VALUES(17,"J.R.R.", "Tolkien", "1892", "1973", "Author");
+
+/*  Created Health Database */
+
+CREATE TABLE health 
+(id INTEGER PRIMARY KEY, 
+Currently TEXT);
+
+INSERT INTO health 
+VALUES
+("1", "deceased"),
+("2", "deceased"),
+("3", "deceased"),
+("4", "deceased"),
+("5", "alive"),
+("6", "deceased"),
+("7", "alive"),
+("8", "deceased"),
+("9", "deceased"),
+("10", "deceased"),
+("11", "alive"),
+("12", "alive"),
+("13", "deceased"),
+("14", "deceased"),
+("15", "deceased"),
+("16", "alive"),
+("17", "deceased");
+
+/*  Displayed database  */
+
+SELECT * FROM famous_people;
+
+/*  Joined Both databases to display who is deceased or alive */
+
+SELECT famous_people.first_name,
+        famous_people.last_name,
+        health.currently
+FROM famous_people
+    JOIN health
+    ON famous_people.id = health.id;
+
+/*  Display who is only alive */
+
+SELECT F.first_name, F.last_name, health.currently
+FROM famous_people AS F
+JOIN health
+ON F.id = health.id
+WHERE health.currently = "alive";
+
+/* Display who was born during World War II 1939-1945 */
+
+SELECT F.first_name, F.last_name, F.birth_year
+FROM famous_people AS F
+WHERE birth_year >= 1939 AND birth_year <=1945;
+
+/* Display only people who had an occupation as a President */
+
+SELECT F.first_name, F.last_name
+FROM famous_people AS F
+WHERE occupation = "President";
