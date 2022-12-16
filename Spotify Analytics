@@ -28,23 +28,26 @@ time_signature integer NOT NULL );
 #Next, I explored the data and answered questions using the following SQL. 
 
 --What are the top 10 songs based on popularity?
-SELECT artist_name, 
-    track_name, 
-    popularity
+SELECT
+artist_name, 
+track_name, 
+popularity
 FROM bit_db.Spotifydata
 ORDER BY popularity DESC
 limit 10;
 
 --Do louder songs have more "danceability" or "energy"? Display 10 loudest songs with energentic and danceability and compare results.
-SELECT artist_name, 
+SELECT
+artist_name, 
 track_name, 
 danceability,
 energy, 
 loudness
 FROM bit_db.Spotifydata
-    ORDER BY loudness DESC, 
-        danceability ASC, 
-            energy DESC;
+ORDER BY 
+loudness DESC, 
+danceability ASC, 
+energy DESC;
 
 --Determine the AVERAGE popularity, danceability, and energy by artist and track.
 SELECT artist_name,  
