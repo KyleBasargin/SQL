@@ -92,3 +92,33 @@ street,
 'safe lane' AS 'label'
 FROM safety_average_cte
 WHERE rating >=4;
+
+
+
+SELECT street, safetyrating,
+AVG(safetyrating) OVER (PARTITION BY street) as "Average_safety_rating"
+FROM CityBikeLanes;
+
+SELECT street, safetyrating, AVG(safetyrating)
+FROM CityBikeLanes
+WHERE street='2nd'
+GROUP BY street, safetyrating;
+
+SELECT street, safetyrating,
+AVG(safetyrating) OVER (PARTITION BY street) as "Average_safety_rating"
+FROM CityBikeLanes
+WHERE street='2nd';
+
+-- 1.Selects the average safetyrating for each bike lane from the CTE
+-- 2. Filters to only the bike lanes that have an average safety rating of 4.0 or higher
+-- 3. Creates a label for these bike lanes that says "Safe Lane"
+
+SELECT street, safetyrating,
+AVG(safetyrating) OVER (partition BY street) AS "Average_safety_rating",
+CASE
+    WHEN AVG(safetyrating) OVER (PARTITION BY safetyrating) >=4 then 'leave as is'
+    WHEN AVG(safetyrating) OVER (PARTITION BY safetyrating) <2.5 then 'Remove'
+    ELSE 'Improvements needed'
+END AS "Recommendation"
+FROM citybikelanes;
+    
